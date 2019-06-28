@@ -2,11 +2,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="my-4 mx-auto">
-    {{-- @php
-        echo '<pre>';
-        print_r(Cart::content());
-        echo '<pre>';
-    @endphp --}}
      @if(count($cart)>0)
         <table style='background:#ffffff' class="table">
             <thead class='thead-dark'>
@@ -43,7 +38,7 @@
                             </form>
                         </td>
                         <td>
-                            {{number_format($cart->total)}}
+                            {{number_format($cart->subtotal, 2)}}
                         </td>
                     </tr>
                     @php
@@ -54,7 +49,7 @@
         </table>
         <ul class="list-group my-3 ">
             <li class="list-group-item bg-dark text-light"><h5 class='text-center'>Cart Details</h5></li>
-            <li class="list-group-item"><strong><i class="fa fa-calculator"></i> Total Price: </strong>{{Cart::total()}}
+            <li class="list-group-item"><strong><i class="fa fa-calculator"></i> Total Price: </strong>{{Cart::subtotal()}}
             
             </li>
 
@@ -125,7 +120,7 @@
 
                     <div class="form-group">
                         <input type="hidden" name="qty" value='{{$qty}}'>
-                        <input type="hidden" name="total" value='{{Cart::total()}}'>
+                        <input type="hidden" name="total" value='{{Cart::subtotal()}}'>
                         <input type="submit"  name='billTo' value='Buy Now' class="btn btn-success btn-sm buying">
                     </div>
                 </form>

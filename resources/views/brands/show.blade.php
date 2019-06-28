@@ -33,7 +33,7 @@
             </ul>
             </div>
         </div>
-        <a href='/brands' class="btn btn-sm btn-secondary mt-2">
+        <a href='/admin/brands' class="btn btn-sm btn-secondary mt-2">
             <i class="fa fa-arrow-left"></i>
             Go Back
         </a>

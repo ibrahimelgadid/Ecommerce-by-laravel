@@ -30,7 +30,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <a href='/categories' class="btn btn-sm btn-secondary">
+                                <a href='/admin/categories' class="btn btn-sm btn-secondary">
                                     <i class="fa fa-arrow-left"></i>
                                     Go Back
                                 </a>

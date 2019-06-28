@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use DB;
@@ -81,7 +82,7 @@ class ProductsController extends Controller
         $product->image = $request->file('image')->storeAs('public/image', $filenameToStore);
         
         $product->save();
-        return redirect('/products')->with('success', 'Item has been added successfully');
+        return redirect('admin/products')->with('success', 'Item has been added successfully');
     }
 
     /**
@@ -169,7 +170,7 @@ class ProductsController extends Controller
         }
 
         $product->save();
-        return redirect('/products')->with('success', 'Item has been Updated successfully');
+        return redirect('admin/products')->with('success', 'Item has been Updated successfully');
     }
 
     /**
@@ -183,7 +184,7 @@ class ProductsController extends Controller
         $cat = Products::find($id);
         Storage::delete($cat->image);
         $cat->delete();
-        return redirect('/products')->with('success', 'Item has been deleted successfully');
+        return redirect('admin/products')->with('success', 'Item has been deleted successfully');
     }
 
 
@@ -192,7 +193,7 @@ class ProductsController extends Controller
         $cat = Products::find($id);
         $cat->active = '1';
         $cat->save();
-        return redirect('/products')->with('success', 'Item has been activated successfully');
+        return redirect('admin/products')->with('success', 'Item has been activated successfully');
     }
 
     public function inActivate(Request $request, $id)
@@ -200,7 +201,7 @@ class ProductsController extends Controller
         $product = Products::find($id);
         $product->active = '0';
         $product->save();
-        return redirect('/products')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/products')->with('success', 'Item has been inActivated successfully');
     }
 
 
@@ -222,7 +223,7 @@ class ProductsController extends Controller
 
         $gallary->image = $request->file('file')->storeAs('public/image/'.$product->id, $filenameToStore);
         $gallary->save();
-        return redirect('/products')->with('success', 'Gallary has been Uploaded successfully');
+        return redirect('admin/products')->with('success', 'Gallary has been Uploaded successfully');
     }
 
 

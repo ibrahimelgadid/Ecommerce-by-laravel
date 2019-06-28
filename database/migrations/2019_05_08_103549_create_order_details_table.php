@@ -19,20 +19,17 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('order_id')
                 ->references('id')
                 ->on('c_orders')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
             $table->unsignedBigInteger('user');
             $table->foreign('user')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
             $table->unsignedBigInteger('product');
             $table->foreign('product')
                 ->references('id')
                 ->on('products')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
 
             $table->string('product_name');
             $table->integer('product_price');

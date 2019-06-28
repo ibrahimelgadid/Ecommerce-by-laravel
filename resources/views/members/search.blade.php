@@ -14,7 +14,7 @@
                 <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <a href="/members/{{$member->id}}" class="text-danger">
+                    <a href="/admin/members/{{$member->id}}" class="text-danger">
                         {{$member->name}}
                     </a>
                 </td>
@@ -28,9 +28,9 @@
                 </td>
                 <td>
                     @if ($member->active==1)
-                        <a class="btn btn-sm btn-success py-0" href="/members/inActivate/{{$member->id}}"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="btn btn-sm btn-success py-0" href="/admin/members/inActivate/{{$member->id}}"><i class="fa fa-thumbs-up"></i></a>
                     @else
-                        <a  class="btn btn-sm btn-secondary py-0" href="/members/activate/{{$member->id}}"><i class="fa fa-thumbs-down"></i></a>
+                        <a  class="btn btn-sm btn-secondary py-0" href="/admin/members/activate/{{$member->id}}"><i class="fa fa-thumbs-down"></i></a>
                     @endif
                 <form class='d-inline' action="{{route('members.destroy', $member->id)}}" method='POST'>
                     @csrf

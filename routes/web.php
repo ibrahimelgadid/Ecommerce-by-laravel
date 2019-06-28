@@ -16,19 +16,20 @@ Auth::routes();
 | Admin Web Routes
 |--------------------------------------
 */
-Route::get('admin/dashboard','AdminController@index')->name('admin.dashboard');;
-Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin','Admin\LoginController@login');
+Route::get('admin/dashboard','AdminCtrls\AdminController@index');
+Route::get('admin/login','Admin\LoginController@showLoginForm');
+Route::post('admin/login','Admin\LoginController@login')->name('admin/login');
 
-Route::get('admin/register','Admin\RegisterController@showRegisterForm')->name('admin.register');
-Route::post('admin/register','Admin\RegisterController@Register');
+Route::get('admin/register','Admin\RegisterController@showRegisterForm');
+Route::post('admin/register','Admin\RegisterController@Register')->name('admin/register');
 
 Route::post('admin-password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::get('admin-password/reset','Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 Route::post('admin-password/reset','Admin\ResetPasswordController@reset');
 Route::get('admin-password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
-// Route::get('admin/logout','Admin\LoginController@logout')->name('admin.logout');
+// Route::post('admin/logout', ['as' => 'admin/logout', 'uses' => 'Admin\LoginController@logout']);
+Route::post('admin/logout','Admin\LoginController@logout')->name('admin/logout');
 
 /*
 |-------------------------------------
@@ -36,10 +37,10 @@ Route::get('admin-password/reset/{token}','Admin\ResetPasswordController@showRes
 |-------------------------------------
 */
 
-Route::resource('categories','CategoriesController');
-Route::get('categories/activate/{id}','CategoriesController@activate');
-Route::get('categories/inActivate/{id}','CategoriesController@inActivate');
-Route::post('categories/search','CategoriesController@search')->name('categories.search');
+Route::resource('admin/categories','AdminCtrls\CategoriesController');
+Route::get('admin/categories/activate/{id}','AdminCtrls\CategoriesController@activate');
+Route::get('admin/categories/inActivate/{id}','AdminCtrls\CategoriesController@inActivate');
+Route::post('admin/categories/search','AdminCtrls\CategoriesController@search')->name('admin/categories.search');
 
 
 /*
@@ -47,10 +48,10 @@ Route::post('categories/search','CategoriesController@search')->name('categories
 | Brands Routes
 |-------------------------------------
 */
-Route::resource('brands','brandsController');
-Route::get('brands/activate/{id}','brandsController@activate');
-Route::get('brands/inActivate/{id}','brandsController@inActivate');
-Route::post('brands/search','brandsController@search')->name('brands.search');
+Route::resource('admin/brands','AdminCtrls\brandsController');
+Route::get('admin/brands/activate/{id}','AdminCtrls\brandsController@activate');
+Route::get('admin/brands/inActivate/{id}','AdminCtrls\brandsController@inActivate');
+Route::post('admin/brands/search','AdminCtrls\brandsController@search')->name('admin/brands.search');
 // ------------------------------------
 
 
@@ -60,33 +61,33 @@ Route::post('brands/search','brandsController@search')->name('brands.search');
 | Products Routes
 |-------------------------------------
 */
-Route::resource('products','productsController');
-Route::get('products/activate/{id}','productsController@activate');
-Route::get('products/inActivate/{id}','productsController@inActivate');
-Route::post('products/search','productsController@search')->name('products.search');
-Route::post('products/upload_images/{id}','productsController@upload_images');
-Route::get('products/deleteGallaryImage/{id}','productsController@deleteGallaryImage');
-Route::get('products/deleteGallary/{id}','productsController@deleteGallary');
+Route::resource('admin/products','AdminCtrls\productsController');
+Route::get('admin/products/activate/{id}','AdminCtrls\productsController@activate');
+Route::get('admin/products/inActivate/{id}','AdminCtrls\productsController@inActivate');
+Route::post('admin/products/search','AdminCtrls\productsController@search')->name('admin/products.search');
+Route::post('admin/products/upload_images/{id}','AdminCtrls\productsController@upload_images');
+Route::get('admin/products/deleteGallaryImage/{id}','AdminCtrls\productsController@deleteGallaryImage');
+Route::get('admin/products/deleteGallary/{id}','AdminCtrls\productsController@deleteGallary');
 
 /*
 |-------------------------------------
 | Members Routes
 |-------------------------------------
 */
-Route::resource('members','MembersController');
-Route::get('members/activate/{id}','MembersController@activate');
-Route::get('members/inActivate/{id}','MembersController@inActivate');
-Route::post('members/search','MembersController@search')->name('members.search');
+Route::resource('admin/members','AdminCtrls\MembersController');
+Route::get('admin/members/activate/{id}','AdminCtrls\MembersController@activate');
+Route::get('admin/members/inActivate/{id}','AdminCtrls\MembersController@inActivate');
+Route::post('admin/members/search','AdminCtrls\MembersController@search')->name('admin/members.search');
 
 /*
 |-------------------------------------
 | Siders Routes
 |-------------------------------------
 */
-Route::resource('sliders','SliderController');
-Route::get('sliders/activate/{id}','SliderController@activate');
-Route::get('sliders/inActivate/{id}','SliderController@inActivate');
-Route::post('sliders/search','SliderController@search')->name('sliders.search');
+Route::resource('admin/sliders','AdminCtrls\SliderController');
+Route::get('admin/sliders/activate/{id}','AdminCtrls\SliderController@activate');
+Route::get('admin/sliders/inActivate/{id}','AdminCtrls\SliderController@inActivate');
+Route::post('admin/sliders/search','AdminCtrls\SliderController@search')->name('admin/sliders.search');
 
 
 /*                                   
@@ -94,41 +95,58 @@ Route::post('sliders/search','SliderController@search')->name('sliders.search');
 | Home Routes                        |
 |------------------------------------|
 */
-Route::get('/', 'HomeController@index');
-Route::post('search','HomeController@search');
-Route::get('show/{id}','HomeController@show');
-Route::get('getProByCat/{id}','HomeController@getProByCat');
-Route::get('getProByBrand/{id}','HomeController@getProByBrand');
+Route::get('/', 'UserCtrls\HomeController@index');
+Route::post('search','UserCtrls\HomeController@search');
+Route::get('show/{id}','UserCtrls\HomeController@show');
+Route::get('getProByCat/{id}','UserCtrls\HomeController@getProByCat');
+Route::get('getProByBrand/{id}','UserCtrls\HomeController@getProByBrand');
 
 /*
 |-------------------------------------
 | Cart Routes
 |-------------------------------------
 */
-Route::get('/cart', 'CartController@index');
-Route::post('/add_cart', 'CartController@add_to_cart');
-Route::put('/update_cart/{id}', 'CartController@update_cart');
-Route::delete('/delete_cart/{id}', 'CartController@delete_cart');
-Route::delete('/clear_cart', 'CartController@clear_cart');
+Route::get('/cart', 'UserCtrls\CartController@index');
+Route::post('/add_cart', 'UserCtrls\CartController@add_to_cart');
+Route::put('/update_cart/{id}', 'UserCtrls\CartController@update_cart');
+Route::delete('/delete_cart/{id}', 'UserCtrls\CartController@delete_cart');
+Route::delete('/clear_cart', 'UserCtrls\CartController@clear_cart');
 
 /*
 |-------------------------------------
-| Shipping Routes
+| Shipping Front Routes
 |-------------------------------------
 */
-Route::get('/thank', 'ShippingController@thank');
-Route::post('/checkout', 'ShippingController@checkout');
-Route::resource('/shipping', 'ShippingController');
-Route::get('/paypal/payment', 'ShippingController@paypal');
+
+Route::get('/thank', 'UserCtrls\CheckoutController@thank');
+Route::post('/checkout', 'UserCtrls\CheckoutController@checkout');
+Route::get('/paypal/payment', 'UserCtrls\CheckoutController@paypal');
+
+
+/*
+|-------------------------------------
+| Checkout Routes
+|-------------------------------------
+*/
+
+Route::resource('admin/checkout', 'UserCtrls\CheckoutController');
 
 /*
 |-------------------------------------
 | Orders Routes
 |-------------------------------------
 */
-Route::get('order/activate/{id}','OrderController@activate');
-Route::get('order/inActivate/{id}','OrderController@inActivate');
-Route::get('order/done/{id}','OrderController@done');
-Route::post('order/search','OrderController@search')->name('order.search');
-Route::get('orders/all','HomeController@orders');
-Route::resource('orders','OrderController');
+Route::get('admin/order/activate/{id}','AdminCtrls\OrderController@activate');
+Route::get('admin/order/inActivate/{id}','AdminCtrls\OrderController@inActivate');
+Route::get('admin/order/done/{id}','AdminCtrls\OrderController@done');
+Route::post('admin/order/search','AdminCtrls\OrderController@search')->name('order.search');
+Route::get('myorders','HomeController@orders');
+Route::resource('admin/orders','AdminCtrls\OrderController');
+
+
+/*
+|-------------------------------------
+| Orders Front Routes
+|-------------------------------------
+*/
+Route::get('myorders','UserCtrls\HomeController@orders');

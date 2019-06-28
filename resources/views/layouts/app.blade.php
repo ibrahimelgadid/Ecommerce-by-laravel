@@ -36,7 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                         <li class="nav-item">
-                            <a class="{{Request::is('orders/all') ? "nav-link active":'nav-link'}}" href="/orders/all">Orders</a>
+                            <a class="{{Request::is('myorders') ? "nav-link active":'nav-link'}}" href="/myorders">Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class='{{Request::is('profile') ? "nav-link active":'nav-link'}}' href="/profile">Profile</a>

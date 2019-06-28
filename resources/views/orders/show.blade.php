@@ -49,7 +49,7 @@
                                 <td>{{$shipping->email}}</td>
                             </tbody>
                         </table>
-                        <a href="/shipping/{{$shipping->id}}/edit" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="/admin/shipping/{{$shipping->id}}/edit" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i> Edit</a>
                     </div>
                 </div>
             </div>

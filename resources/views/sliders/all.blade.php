@@ -6,7 +6,7 @@
     
         <h5>Sliders Management</h5>
         <span class="float-right m-3">
-            <a href="/sliders/create">Add new slider +</a>
+            <a href="/admin/sliders/create">Add new slider +</a>
         </span>
         @if (count($sliders) > 0)
         <table class="table table-dark table-responsive-sm searched">
@@ -31,9 +31,9 @@
                 <td>{{$slider->admin_name}}</td>
                 <td>
                 @if ($slider->active==1)
-                    <a href="/sliders/inActivate/{{$slider->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
+                    <a href="/admin/sliders/inActivate/{{$slider->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
                 @else
-                    <a href="/sliders/activate/{{$slider->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                    <a href="/admin/sliders/activate/{{$slider->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
                 @endif
         
                 </td>

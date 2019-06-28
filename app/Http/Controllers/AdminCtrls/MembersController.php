@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
@@ -24,7 +25,7 @@ class MembersController extends Controller
     }
 
 
-    /**
+/**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -32,9 +33,9 @@ class MembersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('members.show')->with('user',$user);
     }
-
 
 
     /**
@@ -55,7 +56,7 @@ class MembersController extends Controller
         $cat = User::find($id);
         $cat->active = '1';
         $cat->save();
-        return redirect('/members')->with('success', 'Item has been activated successfully');
+        return redirect('admin/members')->with('success', 'Item has been activated successfully');
     }
 
     public function inActivate(Request $request, $id)
@@ -63,7 +64,7 @@ class MembersController extends Controller
         $cat = User::find($id);
         $cat->active = '0';
         $cat->save();
-        return redirect('/members')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/members')->with('success', 'Item has been inActivated successfully');
     }
 
     public function search(Request $request)

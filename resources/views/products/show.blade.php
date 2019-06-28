@@ -63,7 +63,7 @@
         <h5 class='text-center mt-4'>Product Gallary</h5>
         @if(count($gallary) > 0)
             <div>
-                <a href="/products/deleteGallary/{{$product->id}}" class=" delete btn btn-sm btn-danger">Delete Gallary</a>
+                <a href="/admin/products/deleteGallary/{{$product->id}}" class=" delete btn btn-sm btn-danger">Delete Gallary</a>
             </div>
             <div class='row text-center'>
                 @foreach ($gallary as $image) 
@@ -72,14 +72,14 @@
                         <img class='img-fluid' style='height:200px' src="{{Storage::url($image->image)}}" alt="" />
                     </a>
                     <div>
-                    <a href="/products/deleteGallaryImage/{{$image->id}}" class="delete btn btn-sm btn-danger">Delete</a>
+                    <a href="/admin/products/deleteGallaryImage/{{$image->id}}" class="delete btn btn-sm btn-danger">Delete</a>
                     </div>
                 </div>
                 @endforeach
             </div>
         @endif
         <form 
-            action="/products/upload_images/{{$product->id}}" 
+            action="/admin/products/upload_images/{{$product->id}}" 
             class="dropzone my-2" 
             method="POST"
             id="myAwesomeDropzone"
@@ -90,7 +90,7 @@
             <input type="file" name="file" >
         </div>
         </form>
-        <a href='/products' class="btn btn-sm btn-secondary mt-2">
+        <a href='/admin/products' class="btn btn-sm btn-secondary mt-2">
             <i class="fa fa-arrow-left"></i>
             Go Back
         </a>

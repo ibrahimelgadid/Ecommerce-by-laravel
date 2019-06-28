@@ -12,7 +12,7 @@
                             <h5 class='text-center'>Edit Shipping Details</h5>
                         </div>
                         <div class="card-body">
-                            <form id="payment-form" action="/shipping/{{$shipping->id}}" method="POST">
+                            <form id="payment-form" action="/admin/shipping/{{$shipping->id}}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

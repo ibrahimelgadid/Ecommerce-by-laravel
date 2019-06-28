@@ -61,8 +61,16 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/" class="btn btn-secondary btn-sm" style="font-size:13px"><i class="fa fa-arrow-left"></i> Go Back</a>
-                <a href="/carts/add/{{$product->id}}/{{$product->price }}" class="btn btn-danger btn-sm" style="font-size:13px">Add To Cart <i class="fa fa-shopping-cart"></i></a>
+                <a href="/" class="btn btn-secondary btn-sm float-left mr-1" style="font-size:13px"><i class="fa fa-arrow-left"></i> Go Back</a>
+                <form action="/add_cart" method="POST" class='d-inline float-left '>
+                    @csrf
+                    <input type="hidden" name="qty" value="1">
+                    <input type="hidden" name="id" value="{{$product->id}}">
+                    <input type="hidden" name="name" value="{{$product->name}}">
+                    <input type="hidden" name="image" value="{{$product->image}}">
+                    <input type="hidden" name="price" value="{{$product->price}}">
+                    <button type="submit" class="btn btn-danger btn-sm py-1 float-right">Add To Cart <i class="fa fa-shopping-cart"></i></button>
+                </form>
             </div>
         </div>
     </div>

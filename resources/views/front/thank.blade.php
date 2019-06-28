@@ -5,7 +5,7 @@
         <h5 class="text-muted my-3"> 
             Thank You For Purshasing, We Will Contact You Soon...
         </h5>
-        <a href="/orders/" class='d-block mb-3'>see your orders...</a>
+        <a href="/myorders" class='d-block mb-3'>see your orders...</a>
         <a href="/" class="btn btn-secondary btn-sm" style="font-size:13px"><i class="fa fa-arrow-left"></i> Go Back</a>
     </div>
 @endsection

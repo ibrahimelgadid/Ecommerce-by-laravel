@@ -19,14 +19,12 @@ class CreateCOrdersTable extends Migration
             $table->foreign('user')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
             $table->unsignedBigInteger('shipping');
             $table->foreign('shipping')
                 ->references('id')
                 ->on('shippings')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
             $table->integer('total');
             $table->tinyInteger('status')
             ->default('0');

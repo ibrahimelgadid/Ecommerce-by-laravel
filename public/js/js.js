@@ -14,13 +14,12 @@
       var txt = $(this).val();
         $.ajax({
           method:"POST",
-          url:'/categories/search',
+          url:'/admin/categories/search',
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           data:{search:txt},
           dataType:"text",
           success:function(data){
             $(".searched").html(data);
-            console.log(data);
           }
         })
     });
@@ -32,7 +31,7 @@
         $.ajax({
           method:"POST",
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url:'/products/search',
+          url:'/admin/products/search',
           data:{search:txt},
           dataType:"text",
           success:function(data){
@@ -47,7 +46,7 @@
         $.ajax({
           method:"POST",
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url:'/brands/search',
+          url:'/admin/brands/search',
           data:{search:txt},
           dataType:"text",
           success:function(data){
@@ -64,7 +63,7 @@
         $.ajax({
           method:"POST",
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url:'/members/search',
+          url:'/admin/members/search',
           data:{search:txt},
           dataType:"text",
           success:function(data){
@@ -79,7 +78,7 @@
         $.ajax({
           method:"POST",
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url:'/order/search',
+          url:'/admin/order/search',
           data:{search:txt},
           dataType:"text",
           success:function(data){

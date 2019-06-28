@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Brands;
@@ -56,7 +58,7 @@ class BrandsController extends Controller
         $brand->description= $request->input('description');
         $brand->admin_id =  Auth::user()->id;
         $brand->save();
-        return redirect('/brands')->with('success', 'Item has been added successfully');
+        return redirect('admin/brands')->with('success', 'Item has been added successfully');
     }
 
     /**
@@ -107,7 +109,7 @@ class BrandsController extends Controller
         $brand->description= $request->input('description');
         $brand->admin_id = Auth::user()->id;
         $brand->save();
-        return redirect('/brands')->with('success', 'Item has been updated successfully');
+        return redirect('admin/brands')->with('success', 'Item has been updated successfully');
     }
 
     /**
@@ -120,7 +122,7 @@ class BrandsController extends Controller
     {
         $brand = brands::find($id);
         $brand->delete();
-        return redirect('/brands')->with('success', 'Item has been deleted successfully');
+        return redirect('admin/brands')->with('success', 'Item has been deleted successfully');
     }
 
 
@@ -129,7 +131,7 @@ class BrandsController extends Controller
         $brand = brands::find($id);
         $brand->active = '1';
         $brand->save();
-        return redirect('/brands')->with('success', 'Item has been activated successfully');
+        return redirect('admin/brands')->with('success', 'Item has been activated successfully');
     }
 
     public function inActivate(Request $request, $id)
@@ -137,7 +139,7 @@ class BrandsController extends Controller
         $brand = brands::find($id);
         $brand->active = '0';
         $brand->save();
-        return redirect('/brands')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/brands')->with('success', 'Item has been inActivated successfully');
     }
 
     public function search(Request $request)

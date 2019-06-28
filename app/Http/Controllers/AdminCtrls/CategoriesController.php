@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Categories;
@@ -58,7 +60,7 @@ class CategoriesController extends Controller
         $cat->description= $request->input('description');
         $cat->admin_id =  Auth::user()->id;
         $cat->save();
-        return redirect('/categories')->with('success', 'Item has been added successfully');
+        return redirect('admin/categories')->with('success', 'Item has been added successfully');
     }
 
     /**
@@ -69,7 +71,6 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        // $cat = Categories::find($id);
         $cat =DB::table('categories')
         ->join('admins', 'categories.admin_id', '=', 'admins.id')
         ->select('categories.*', 'admins.name as admin_name')
@@ -109,7 +110,7 @@ class CategoriesController extends Controller
         $cat->description= $request->input('description');
         $cat->admin_id = Auth::user()->id;
         $cat->save();
-        return redirect('/categories')->with('success', 'Item has been updated successfully');
+        return redirect('admin/categories')->with('success', 'Item has been updated successfully');
     }
 
     /**
@@ -122,7 +123,7 @@ class CategoriesController extends Controller
     {
         $cat = Categories::find($id);
         $cat->delete();
-        return redirect('/categories')->with('success', 'Item has been deleted successfully');
+        return redirect('admin/categories')->with('success', 'Item has been deleted successfully');
     }
 
 
@@ -131,7 +132,7 @@ class CategoriesController extends Controller
         $cat = Categories::find($id);
         $cat->active = '1';
         $cat->save();
-        return redirect('/categories')->with('success', 'Item has been activated successfully');
+        return redirect('admin/categories')->with('success', 'Item has been activated successfully');
     }
 
     public function inActivate(Request $request, $id)
@@ -139,7 +140,7 @@ class CategoriesController extends Controller
         $cat = Categories::find($id);
         $cat->active = '0';
         $cat->save();
-        return redirect('/categories')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/categories')->with('success', 'Item has been inActivated successfully');
     }
 
     public function search(Request $request)

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Slider;
@@ -66,7 +67,7 @@ class SliderController extends Controller
         $slider->image = $request->file('image')->storeAs('public/image/sliders', $filenameToStore);
         
         $slider->save();
-        return redirect('/sliders')->with('success', 'Item has been added successfully');
+        return redirect('admin/sliders')->with('success', 'Item has been added successfully');
     }
 
     /**
@@ -122,7 +123,7 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         $slider->active = '1';
         $slider->save();
-        return redirect('/sliders')->with('success', 'Item has been activated successfully');
+        return redirect('admin/sliders')->with('success', 'Item has been activated successfully');
     }
 
     public function inActivate(Request $request, $id)
@@ -130,7 +131,7 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         $slider->active = '0';
         $slider->save();
-        return redirect('/sliders')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/sliders')->with('success', 'Item has been inActivated successfully');
     }
 
     public function search(Request $request)

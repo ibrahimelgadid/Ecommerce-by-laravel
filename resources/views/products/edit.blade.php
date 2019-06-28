@@ -99,7 +99,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                        <a href='/products' class="btn btn-sm btn-secondary">
+                        <a href='/admin/products' class="btn btn-sm btn-secondary">
                             <i class="fa fa-arrow-left"></i>
                             Go Back
                         </a>

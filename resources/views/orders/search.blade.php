@@ -21,9 +21,9 @@
                 @if ($order->status==0)
                 <td>
                     @if ($order->active==1)
-                        <a class="text-success" href="/order/inActivate/{{$order->id}}">YES</a>
+                        <a class="text-success" href="/admin/order/inActivate/{{$order->id}}">YES</a>
                     @else
-                        <a class="text-warning" href="/order/activate/{{$order->id}}">NO</a>
+                        <a class="text-warning" href="/admin/order/activate/{{$order->id}}">NO</a>
                     @endif
                 </td>
                 @else
@@ -33,16 +33,16 @@
                     @if ($order->status==1)
                         <i class="fa fa-thumbs-up text-success fa"></i>
                     @else
-                        <a href="/order/done/{{$order->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                        <a href="/admin/order/done/{{$order->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
                     @endif
                 </td>
                 <td>
-                    <form class='d-inline' action="/order/{{$order->shipping}}" method='POST'>
+                    <form class='d-inline' action="/admin/order/{{$order->shipping}}" method='POST'>
                         @csrf
                         @method('DELETE')
                         <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
                     </form>
-                    <a href="/orders/show/{{$order->id}}" class="btn btn-info btn-sm text-white py-0"><i class="fa fa-info"></i></a>
+                    <a href="/admin/orders/show/{{$order->id}}" class="btn btn-info btn-sm text-white py-0"><i class="fa fa-info"></i></a>
                 </td>
             </tr>
             @endforeach

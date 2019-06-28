@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminCtrls;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\C_order;
@@ -96,7 +98,7 @@ class OrderController extends Controller
         $shipping = Shipping::where('id', $c->id)->first();
         $order->product_qty= $request->input('qty');
         $order->save();
-        return redirect('/order/show/'.$shipping->id)->with('success', 'Order has been updated successfully');
+        return redirect('admin/order/show/'.$shipping->id)->with('success', 'Order has been updated successfully');
     }
 
     /**
@@ -117,7 +119,7 @@ class OrderController extends Controller
         $order = C_order::find($id);
         $order->active = '1';
         $order->save();
-        return redirect('/orders')->with('success', 'Item has been activated successfully');
+        return redirect('admin/orders')->with('success', 'Item has been activated successfully');
     }
 
     public function done(Request $request, $id)
@@ -125,7 +127,7 @@ class OrderController extends Controller
         $order = C_order::find($id);
         $order->status = '1';
         $order->save();
-        return redirect('/orders')->with('success', 'Order has been finished');
+        return redirect('admin/orders')->with('success', 'Order has been finished');
     }
 
     public function inActivate(Request $request, $id)
@@ -133,7 +135,7 @@ class OrderController extends Controller
         $order = C_order::find($id);
         $order->active = '0';
         $order->save();
-        return redirect('/orders')->with('success', 'Item has been inActivated successfully');
+        return redirect('admin/orders')->with('success', 'Item has been inActivated successfully');
     }
 
     public function search(Request $request)

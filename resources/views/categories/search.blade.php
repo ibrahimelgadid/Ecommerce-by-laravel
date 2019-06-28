@@ -14,16 +14,16 @@
                 <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <a href="/categories/{{$cat->id}}" class="text-danger">
+                    <a href="/admin/categories/{{$cat->id}}" class="text-danger">
                         {{$cat->cat_name}}
                     </a>
                 </td>
                 <td>{{$cat->admin_name}}</td>
                 <td>
                 @if ($cat->active==1)
-                    <a href="/categories/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
+                    <a href="/admin/categories/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
                 @else
-                    <a href="/categories/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                    <a href="/admin/categories/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
                 @endif
         
                 </td>
@@ -33,7 +33,7 @@
                     @method('DELETE')
                     <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
                 </form>
-                <a href="/categories/{{$cat->id}}/edit" class="btn text-white btn-info btn-sm py-0"><i class="fa fa-edit"></i></a>
+                <a href="/admin/categories/{{$cat->id}}/edit" class="btn text-white btn-info btn-sm py-0"><i class="fa fa-edit"></i></a>
                 </td>
                 </tr>
                 @endforeach

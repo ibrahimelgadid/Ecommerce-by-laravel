@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\UserCtrls;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Shipping;
@@ -9,7 +10,7 @@ use App\Order_details;
 use Cart;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
-class ShippingController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class ShippingController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth');
     }
 
     public function thank()
@@ -69,63 +70,10 @@ class ShippingController extends Controller
             $details->product_qty = $pro->qty;
             $details->save();
         }
+
+        $cartContent = Cart::destroy();
         
         return redirect('/thank')->with('success', 'Item has been added successfully');
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $shipping = Shipping::where('id',$id)->first();
-        return view('orders.editShipping', ['shipping'=>$shipping]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'name'=>'required|min:2|unique:shippings,name,'.$id,
-            'email'=>'required|email',
-            'mobile'=>'required',
-            'address'=>'required',
-            'city'=>'required',
-            'payment_method'=>'required',
-            ]);
-            
-        $shipping = Shipping::find($id);
-        $shipping->name = $request->input('name');
-        $shipping->email= $request->input('email');
-        $shipping->mobile= $request->input('mobile');
-        $shipping->address= $request->input('address');
-        $shipping->city= $request->input('city');
-        $shipping->payment_method= $request->input('payment_method');
-        $shipping->save();
-        return redirect('/order/show/'.$shipping->id)->with('success', 'Item has been updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $shipping = Shipping::find($id);
-        $shipping->delete();
-        return redirect()->back()->with('success','Item has been deleted successfully');
     }
 
 
