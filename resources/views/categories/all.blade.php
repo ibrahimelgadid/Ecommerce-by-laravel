@@ -33,9 +33,9 @@
                 <td>
                     @if (Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 )
                         @if ($cat->active==1)
-                            <a href="/admin/categoriess/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
+                            <a href="/admin/categories/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
                         @else
-                            <a href="/admin/categoriess/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                            <a href="/admin/categories/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
                         @endif
                     @else
                         <small>for owner or super admin only</small>

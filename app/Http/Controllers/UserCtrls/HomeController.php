@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function show($id){
         $product =DB::table('products')
-        ->join('admins', 'products.product_user', '=', 'admins.id')
+        ->join('admins', 'products.admin_id', '=', 'admins.id')
         ->join('categories', 'products.cat_id', '=', 'categories.id')
         ->join('brands', 'products.brand_id', '=', 'brands.id')
         ->where('products.id',$id)
@@ -59,7 +59,7 @@ class HomeController extends Controller
 
     public function getProByCat($id){
         $products =DB::table('products')
-        ->join('admins', 'products.product_user', '=', 'admins.id')
+        ->join('admins', 'products.admin_id', '=', 'admins.id')
         ->join('categories', 'products.cat_id', '=', 'categories.id')
         ->join('brands', 'products.brand_id', '=', 'brands.id')
         ->where('categories.id',$id)
@@ -76,7 +76,7 @@ class HomeController extends Controller
 
     public function getProByBrand($id){
         $products =DB::table('products')
-        ->join('admins', 'products.product_user', '=', 'admins.id')
+        ->join('admins', 'products.admin_id', '=', 'admins.id')
         ->join('categories', 'products.cat_id', '=', 'categories.id')
         ->join('brands', 'products.brand_id', '=', 'brands.id')
         ->where('brands.id',$id)

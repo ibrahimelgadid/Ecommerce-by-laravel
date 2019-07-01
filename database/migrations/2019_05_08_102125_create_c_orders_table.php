@@ -25,7 +25,7 @@ class CreateCOrdersTable extends Migration
                 ->references('id')
                 ->on('shippings')
                 ->onDelete('cascade');
-            $table->integer('total');
+            $table->string('total');
             $table->tinyInteger('status')
             ->default('0');
             $table->tinyInteger('active')

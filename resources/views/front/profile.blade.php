@@ -8,7 +8,7 @@
                 My Profile <a href='/profile/{{Auth::user()->id}}/edit' class='float-right btn btn-sm btn-primary'><i class='fa fa-gear text-white'></i></a>
             </div>
             <div class="card-body">
-                <img style='height:200px; width:200px; border-radius:100px' class="img-fluid" src="{{Storage::url(Auth::user()->userAvatar)}}" alt="Card image cap">
+                <img style='height:200px; width:200px; border-radius:100px' class="img-fluid" src="{{(Auth::user()->userAvatar=='noimage.png') ? '/images/noimage.png' : Storage::url(Auth::user()->userAvatar)}}" alt="">
                 <ul class='list-unstyled'>
                     <li>
                         <strong>ID: </strong>{{ Auth::user()->id }}
