@@ -46,7 +46,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 my-2">
                             <div class="card position-relative" >
                                 <span class="badge badge-success position-absolute p-1 ">{{$pro->price}}$</span>
-                                <img style='height:200px' class="img-fluid" src="{{Storage::url($pro->image)}}" alt="Card image cap">
+                                <img style='height:200px' class="img-fluid" src="{{Storage::url($pro->image)}}" alt="">
                                 <div class="card-body">
                                     <h6 class="card-title">{{$pro->name}}</h6>
                                     <a href="/show/{{$pro->id}}" class="btn btn-info btn-sm py-1 text-white float-left" style="font-size:13px">Details</a>

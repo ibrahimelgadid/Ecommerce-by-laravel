@@ -43,9 +43,6 @@
                         <li class="nav-item">
                             <a class="{{Request::is('myorders') ? "nav-link active":'nav-link'}}" href="/myorders">{{__('navbar.orders')}}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='{{Request::is('profile') ? "nav-link active":'nav-link'}}' href="/profile/{{ Auth::user()->id }}">{{__('navbar.profile')}}</a>
-                        </li>
                         @endauth
                     </ul>
 
@@ -67,10 +64,14 @@
                                 </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <img src='{{(Auth::user()->userAvatar=='noimage.png') ? '/images/noimage.png' : Storage::url(Auth::user()->userAvatar)}}' alt='' style='height:25px;width:25px;border-radius:50%'>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
+                                        {{ __('navbar.profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
