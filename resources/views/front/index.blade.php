@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
+
 <div class=" my-4 mx-auto">
     <form action="/search" method='POST' class='form-inline float-right'>
         @csrf

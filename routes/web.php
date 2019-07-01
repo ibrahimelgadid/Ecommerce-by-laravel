@@ -2,6 +2,18 @@
 
 /*
 |-------------------------------------
+| Languages Routes
+|-------------------------------------
+*/
+Route::get('locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
+
+
+/*
+|-------------------------------------
 | Web Routes
 |-------------------------------------
 */
@@ -16,7 +28,8 @@ Auth::routes();
 | Admin Web Routes
 |--------------------------------------
 */
-Route::get('admin/dashboard','AdminCtrls\AdminController@index');
+
+Route::get('admin/dashboard','AdminCtrls\DashboardController@index');
 Route::get('admin/login','Admin\LoginController@showLoginForm');
 Route::post('admin/login','Admin\LoginController@login')->name('admin/login');
 
@@ -75,6 +88,9 @@ Route::get('admin/products/deleteGallary/{id}','AdminCtrls\productsController@de
 |-------------------------------------
 */
 Route::resource('admin/members','AdminCtrls\MembersController');
+Route::get('admin/amembers','AdminCtrls\DashboardController@activeMembers');
+Route::get('admin/pmembers','AdminCtrls\DashboardController@pendingMembers');
+
 Route::get('admin/members/activate/{id}','AdminCtrls\MembersController@activate');
 Route::get('admin/members/inActivate/{id}','AdminCtrls\MembersController@inActivate');
 Route::post('admin/members/search','AdminCtrls\MembersController@search')->name('admin/members.search');
@@ -88,6 +104,16 @@ Route::resource('admin/sliders','AdminCtrls\SliderController');
 Route::get('admin/sliders/activate/{id}','AdminCtrls\SliderController@activate');
 Route::get('admin/sliders/inActivate/{id}','AdminCtrls\SliderController@inActivate');
 Route::post('admin/sliders/search','AdminCtrls\SliderController@search')->name('admin/sliders.search');
+
+
+
+/*
+|-------------------------------------
+| Profile Routes
+|-------------------------------------
+*/
+
+Route::resource('profile','UserCtrls\ProfileController');
 
 
 /*                                   
@@ -129,7 +155,7 @@ Route::get('/paypal/payment', 'UserCtrls\CheckoutController@paypal');
 |-------------------------------------
 */
 
-Route::resource('admin/checkout', 'UserCtrls\CheckoutController');
+Route::resource('admin/shipping', 'AdminCtrls\ShippingController');
 
 /*
 |-------------------------------------
@@ -140,7 +166,6 @@ Route::get('admin/order/activate/{id}','AdminCtrls\OrderController@activate');
 Route::get('admin/order/inActivate/{id}','AdminCtrls\OrderController@inActivate');
 Route::get('admin/order/done/{id}','AdminCtrls\OrderController@done');
 Route::post('admin/order/search','AdminCtrls\OrderController@search')->name('order.search');
-Route::get('myorders','HomeController@orders');
 Route::resource('admin/orders','AdminCtrls\OrderController');
 
 

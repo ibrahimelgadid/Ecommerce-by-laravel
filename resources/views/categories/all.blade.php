@@ -31,20 +31,28 @@
                 </td>
                 <td>{{$cat->admin_name}}</td>
                 <td>
-                @if ($cat->active==1)
-                    <a href="/admin/categories/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
-                @else
-                    <a href="/admin/categories/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
-                @endif
+                    @if (Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 )
+                        @if ($cat->active==1)
+                            <a href="/admin/categoriess/inActivate/{{$cat->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
+                        @else
+                            <a href="/admin/categoriess/activate/{{$cat->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                        @endif
+                    @else
+                        <small>for owner or super admin only</small>
+                    @endif
         
                 </td>
                 <td>
-                <form class='d-inline' action="{{route('categories.destroy', $cat->id)}}" method='POST'>
-                    @csrf
-                    @method('DELETE')
-                    <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
-                </form>
-                <a href="/admin/categories/{{$cat->id}}/edit" class="btn text-white btn-info btn-sm py-0"><i class="fa fa-edit"></i></a>
+                    @if (Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 )
+                        <form class='d-inline' action="{{route('categories.destroy', $cat->id)}}" method='POST'>
+                            @csrf
+                            @method('DELETE')
+                            <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
+                        </form>
+                        <a href="/admin/categories/{{$cat->id}}/edit" class="btn text-white btn-info btn-sm py-0"><i class="fa fa-edit"></i></a>
+                    @else
+                        <small>for owner or super admin only</small>
+                    @endif
                 </td>
                 </tr>
                 @endforeach

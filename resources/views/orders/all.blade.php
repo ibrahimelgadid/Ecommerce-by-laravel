@@ -44,12 +44,12 @@
                         @endif
                     </td>
                     <td>
-                        <form class='d-inline' action="/shipping/{{$order->shipping}}" method='POST'>
+                        <form class='d-inline' action="/admin/shipping/{{$order->shipping}}" method='POST'>
                             @csrf
                             @method('DELETE')
                             <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
                         </form>
-                        <a href="/admin/orders/{{$order->id}}" class="btn btn-info btn-sm text-white py-0"><i class="fa fa-info"></i></a>
+                        <a href="/admin/orders/{{$order->shipping}}" class="btn btn-info btn-sm text-white py-0"><i class="fa fa-info"></i></a>
                     </td>
                 </tr>
                 @endforeach

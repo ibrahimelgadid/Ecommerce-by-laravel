@@ -95,10 +95,10 @@ class OrderController extends Controller
             
         $order = Order_details::find($id);
         $c = C_order::where('id', $order->order_id)->first();
-        $shipping = Shipping::where('id', $c->id)->first();
+        $shipping = Shipping::where('id', $c->shipping)->first();
         $order->product_qty= $request->input('qty');
         $order->save();
-        return redirect('admin/order/show/'.$shipping->id)->with('success', 'Order has been updated successfully');
+        return redirect('admin/orders/'.$shipping->id)->with('success', 'Order has been updated successfully');
     }
 
     /**

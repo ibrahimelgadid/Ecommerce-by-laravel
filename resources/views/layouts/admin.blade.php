@@ -38,13 +38,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
+                        @guest('admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/admin/login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ url('/admin/login') }}">{{ __('navbar.login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/admin/register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ url('/admin/register') }}">{{ __('navbar.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -57,7 +57,7 @@
                                     <a class="dropdown-item" href="{{ route('admin/logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('navbar.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('admin/logout') }}" method="POST" style="display: none;">
@@ -72,10 +72,10 @@
         </nav>
 
         <main class="py-">
-            @if (Auth::user())
+            @auth('admin')
                 
             @include('inc.sidebar')
-            @endif
+            @endauth
             @yield('admin')
         </main>
     </div>

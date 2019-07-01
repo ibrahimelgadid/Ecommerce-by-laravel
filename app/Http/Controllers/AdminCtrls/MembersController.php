@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
+use Auth;
 
 class MembersController extends Controller
 {
@@ -47,24 +48,38 @@ class MembersController extends Controller
     public function destroy($id)
     {
         $member = User::find($id);
-        $member->delete();
-        return redirect()->back()->with('success','Item has been deleted successfully');
+        if( Auth::user()->super_admin === 1 ){
+            $member->delete();
+            return redirect()->back()->with('success','Item has been deleted successfully');
+        }else {
+            return redirect('/admin/members')->with('error', 'This action for Super admin only');
+        }
     }
 
     public function activate(Request $request, $id)
     {
-        $cat = User::find($id);
-        $cat->active = '1';
-        $cat->save();
-        return redirect('admin/members')->with('success', 'Item has been activated successfully');
+        $member = User::find($id);
+        if( Auth::user()->super_admin === 1 ){
+
+            $member->active = '1';
+            $member->save();
+            return redirect('admin/members')->with('success', 'Item has been activated successfully');
+        }else {
+            return redirect('/admin/members')->with('error', 'This action for Super admin only');
+        }
     }
 
     public function inActivate(Request $request, $id)
     {
-        $cat = User::find($id);
-        $cat->active = '0';
-        $cat->save();
-        return redirect('admin/members')->with('success', 'Item has been inActivated successfully');
+        $member = User::find($id);
+        if( Auth::user()->super_admin === 1 ){
+
+            $member->active = '0';
+            $member->save();
+            return redirect('admin/members')->with('success', 'Item has been inActivated successfully');
+        }else {
+            return redirect('/admin/members')->with('error', 'This action for Super admin only');
+        }
     }
 
     public function search(Request $request)

@@ -17,8 +17,8 @@ class CreateSlidersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('image');
-            $table->unsignedBigInteger('slider_creator');
-            $table->foreign('slider_creator')
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins')
                 ->onDelete('cascade')

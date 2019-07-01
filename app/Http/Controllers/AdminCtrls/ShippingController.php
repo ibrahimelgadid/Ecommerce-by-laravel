@@ -63,7 +63,7 @@ class ShippingController extends Controller
         $shipping->city= $request->input('city');
         $shipping->payment_method= $request->input('payment_method');
         $shipping->save();
-        return redirect('admin/order/show/'.$shipping->id)->with('success', 'Item has been updated successfully');
+        return redirect('admin/orders/'.$shipping->id)->with('success', 'Item has been updated successfully');
     }
 
     /**

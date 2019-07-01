@@ -28,24 +28,15 @@
                 </td>
                 <td>{{$member->email}}</td>
                 <td>
-                @if ($member->active==1)
                     Active
-                @else
-                    Pending
-                @endif
-        
                 </td>
                 <td>
-                    @if (Auth::user()->id === $member->admin_id || Auth::user()->super_admin === 1 )
-                        @if ($member->active==1)
-                            <a href="/admin/members/inActivate/{{$member->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
-                        @else
-                            <a href="/admin/members/activate/{{$member->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
-                        @endif
+                    @if ( Auth::user()->super_admin === 1 )
+                        <a href="/admin/members/inActivate/{{$member->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
                     @else
                         <small>for owner or super admin only</small>
                     @endif
-                    @if (Auth::user()->id === $member->admin_id || Auth::user()->super_admin === 1 )
+                    @if ( Auth::user()->super_admin === 1 )
                         <form class='d-inline' action="{{route('members.destroy', $member->id)}}" method='POST'>
                             @csrf
                             @method('DELETE')
@@ -62,7 +53,7 @@
         </table>
         {{ $members->links() }}
         @else
-        <p class="mt-4 text-danger"><span class='btn btn-sm btn-danger' style='border-radius:50%'><i class="fa fa-warning"></i></span> There is no Members</p>
+        <p class="mt-4 text-danger"><span class='btn btn-sm btn-danger' style='border-radius:50%'><i class="fa fa-warning"></i></span> There is no Active Members</p>
         @endif
     </div>
 

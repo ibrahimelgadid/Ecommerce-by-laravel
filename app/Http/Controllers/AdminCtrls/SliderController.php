@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Slider;
 use DB;
 use Storage;
+use Auth;
 
 class SliderController extends Controller
 {
@@ -22,7 +23,7 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = DB::table('sliders')
-        ->join('admins', 'sliders.slider_creator', '=', 'admins.id')
+        ->join('admins', 'sliders.admin_id', '=', 'admins.id')
         ->select('sliders.*', 'admins.name as admin_name')
         ->paginate(10);
         return view('sliders.all', ['sliders'=>$sliders]);
@@ -54,7 +55,7 @@ class SliderController extends Controller
 
         $slider = new Slider;
         $slider->name = $request->input('slider');
-        $slider->slider_creator = auth()->user()->id;
+        $slider->admin_id = auth()->user()->id;
         $slider->description= $request->input('description');
 
         $fileExt =  $request->file('image')->getClientOriginalExtension();
@@ -113,25 +114,40 @@ class SliderController extends Controller
     public function destroy($id)
     {
         $slider = Slider::find($id);
-        Storage::delete($slider->image);
-        $slider->delete();
-        return redirect()->back()->with('success','Item has been deleted successfully');
+        if(Auth::user()->id === $slider->admin_id || Auth::user()->super_admin === 1 ){
+
+            Storage::delete($slider->image);
+            $slider->delete();
+            return redirect()->back()->with('success','Item has been deleted successfully');
+        }else {
+            return redirect('/admin/sliders')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     public function activate(Request $request, $id)
     {
         $slider = Slider::find($id);
-        $slider->active = '1';
-        $slider->save();
-        return redirect('admin/sliders')->with('success', 'Item has been activated successfully');
+        if(Auth::user()->id === $slider->admin_id || Auth::user()->super_admin === 1 ){
+
+            $slider->active = '1';
+            $slider->save();
+            return redirect('admin/sliders')->with('success', 'Item has been activated successfully');
+        }else {
+            return redirect('/admin/sliders')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     public function inActivate(Request $request, $id)
     {
         $slider = Slider::find($id);
-        $slider->active = '0';
-        $slider->save();
-        return redirect('admin/sliders')->with('success', 'Item has been inActivated successfully');
+        if(Auth::user()->id === $slider->admin_id || Auth::user()->super_admin === 1 ){
+
+            $slider->active = '0';
+            $slider->save();
+            return redirect('admin/sliders')->with('success', 'Item has been inActivated successfully');
+        }else {
+            return redirect('/admin/sliders')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     public function search(Request $request)

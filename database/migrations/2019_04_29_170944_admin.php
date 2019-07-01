@@ -17,6 +17,7 @@ class Admin extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->tinyInteger('super-admin')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

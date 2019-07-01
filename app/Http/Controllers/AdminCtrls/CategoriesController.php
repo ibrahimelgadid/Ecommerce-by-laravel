@@ -88,7 +88,11 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $cat = Categories::find($id);
-        return view('categories.edit')->with('cat',$cat);
+        if(Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 ){
+            return view('categories.edit')->with('cat',$cat);
+        }else {
+            return redirect('/admin/categories')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     /**
@@ -100,17 +104,22 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'category'=>'required|min:2|unique:categories,cat_name,'.$id,
-            'description'=>'required|min:5',
-        ]);
 
         $cat = Categories::find($id);
-        $cat->cat_name = $request->input('category');
-        $cat->description= $request->input('description');
-        $cat->admin_id = Auth::user()->id;
-        $cat->save();
-        return redirect('admin/categories')->with('success', 'Item has been updated successfully');
+        if(Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 ){
+            $this->validate($request, [
+                'category'=>'required|min:2|unique:categories,cat_name,'.$id,
+                'description'=>'required|min:5',
+            ]);
+    
+            $cat->cat_name = $request->input('category');
+            $cat->description= $request->input('description');
+            $cat->admin_id = Auth::user()->id;
+            $cat->save();
+            return redirect('/admin/categories')->with('success', 'Item has been updated successfully');
+        }else {
+            return redirect('/admin/categories')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     /**
@@ -122,25 +131,37 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $cat = Categories::find($id);
-        $cat->delete();
-        return redirect('admin/categories')->with('success', 'Item has been deleted successfully');
+        if(Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 ){
+            $cat->delete();
+            return redirect('admin/categories')->with('success', 'Item has been deleted successfully');
+        }else {
+            return redirect('/admin/categories')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
 
     public function activate(Request $request, $id)
     {
         $cat = Categories::find($id);
-        $cat->active = '1';
-        $cat->save();
-        return redirect('admin/categories')->with('success', 'Item has been activated successfully');
+        if(Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 ){
+            $cat->active = '1';
+            $cat->save();
+            return redirect('admin/categories')->with('success', 'Item has been activated successfully');
+        }else {
+            return redirect('/admin/categories')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     public function inActivate(Request $request, $id)
     {
         $cat = Categories::find($id);
-        $cat->active = '0';
-        $cat->save();
-        return redirect('admin/categories')->with('success', 'Item has been inActivated successfully');
+        if(Auth::user()->id === $cat->admin_id || Auth::user()->super_admin === 1 ){
+            $cat->active = '0';
+            $cat->save();
+            return redirect('admin/categories')->with('success', 'Item has been inActivated successfully');
+        }else {
+            return redirect('/admin/categories')->with('error', 'This action for owner or Super admin only');
+        }
     }
 
     public function search(Request $request)

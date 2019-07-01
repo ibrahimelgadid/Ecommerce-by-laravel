@@ -21,8 +21,8 @@ class Products extends Migration
             $table->integer('price');
             $table->string('image');
 
-            $table->unsignedBigInteger('product_user');
-            $table->foreign('product_user')
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins')
                 ->onDelete('cascade')

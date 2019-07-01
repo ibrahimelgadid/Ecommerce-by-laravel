@@ -30,19 +30,27 @@
                 <td><img style="height:30px;width:30px" src="{{Storage::url($slider->image)}}" alt=""></td>
                 <td>{{$slider->admin_name}}</td>
                 <td>
-                @if ($slider->active==1)
-                    <a href="/admin/sliders/inActivate/{{$slider->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
-                @else
-                    <a href="/admin/sliders/activate/{{$slider->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
-                @endif
+                    @if (Auth::user()->id === $slider->admin_id || Auth::user()->super_admin === 1 )
+                        @if ($slider->active==1)
+                            <a href="/admin/sliders/inActivate/{{$slider->id}}"><i class="fa fa-thumbs-up text-success"></i></a>
+                        @else
+                            <a href="/admin/sliders/activate/{{$slider->id}}"><i class="fa fa-thumbs-down text-danger"></i></a>
+                        @endif
+                    @else
+                        <small>for owner or super admin only</small>
+                    @endif
         
                 </td>
                 <td>
-                <form class='d-inline' action="{{route('sliders.destroy', $slider->id)}}" method='POST'>
-                    @csrf
-                    @method('DELETE')
-                    <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
-                </form>
+                @if (Auth::user()->id === $slider->admin_id || Auth::user()->super_admin === 1 )
+                        <form class='d-inline' action="{{route('sliders.destroy', $slider->id)}}" method='POST'>
+                            @csrf
+                            @method('DELETE')
+                            <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
+                        </form>
+                    @else
+                        <small>for owner or super admin only</small>
+                    @endif
                 </td>
                 </tr>
                 @endforeach

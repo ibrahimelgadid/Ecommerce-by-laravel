@@ -81,8 +81,8 @@
                                         <td>{{$order->product_qty}}</td>
                                         <td>{{number_format($order->product_price * $order->product_qty,2)}}$</td>
                                         <td>
-                                            <a href="/order/{{$order->id}}/edit" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i></a>
-                                            <form class='d-inline' action="/order/{{$order->id}}" method='POST'>
+                                            <a href="/admin/orders/{{$order->id}}/edit" class="btn btn-sm btn-secondary"><i class="fa fa-edit"></i></a>
+                                            <form class='d-inline' action="/admin/orders/{{$order->id}}" method='POST'>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class='btn btn-danger delete  btn-sm py-0' type="submit" ><i class="fa fa-trash"></i></button>
@@ -101,7 +101,7 @@
 
         </div>
     
-        <a href='/orders' class="btn btn-sm btn-secondary mt-2">
+        <a href='/admin/orders' class="btn btn-sm btn-secondary mt-2">
             <i class="fa fa-arrow-left"></i>
             Go Back
         </a>
